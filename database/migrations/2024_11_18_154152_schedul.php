@@ -11,22 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('schedul', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('password');
-            $table->string('phone')->nullable();
-            $table->string('home_location')->nullable();
-            $table->enum('role', ['user', 'admin'])->default('user');
+            $table->foreignId('dep_id')->constrained('departments');
+            $table->string('link_image')->nullable();
+            $table->string('title');
+            
             $table->timestamps();
-        });    }
+        });
+    }
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
-
+        Schema::dropIfExists('schedul');
     }
 };
