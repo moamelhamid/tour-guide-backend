@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('password');
-            $table->string('email')->unique();
+            $table->string('email')->unique()->nullable();
             $table->string('phone')->nullable();
             $table->string('home_location')->nullable();
-            $table->foreignId('dep_id')->constrained('departments')->onDelete('cascade');
+            $table->foreignId('dep_id')->nullable()->constrained('departments')->onDelete('cascade');
             $table->enum('role', ['user', 'admin'])->default('user');
             $table->timestamps();
         });
