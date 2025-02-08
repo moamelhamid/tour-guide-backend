@@ -7,6 +7,7 @@ use App\Models\User;
 use Brick\Math\BigInteger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use PHPOpenSourceSaver\JWTAuth\Contracts\Providers\JWT;
 use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
@@ -26,7 +27,7 @@ class AuthController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
         $input = $request->all();
-        $input['password'] = bcrypt($input['password']);
+        $input['password'] = $input['password'];
         $dep_id = BigInteger::of($input['dep_id']);
         $user = User::create([
             'name' => $input['name'],

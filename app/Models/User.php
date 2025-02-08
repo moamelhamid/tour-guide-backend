@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
-
+use App\Models\Notification; // Add this line
 class User extends Authenticatable implements JWTSubject
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -28,7 +28,7 @@ class User extends Authenticatable implements JWTSubject
         'role',
         'phone',
         'home_location',
-        
+
     ];
 
     /**
@@ -41,8 +41,8 @@ class User extends Authenticatable implements JWTSubject
         'remember_token',
     ];
 
-   
-   
+
+
     public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -58,6 +58,7 @@ class User extends Authenticatable implements JWTSubject
     }
     public function department(): BelongsTo
     {
-        return $this->belongsTo(Department::class);
+        return $this->belongsTo(Department::class, 'dep_id');
     }
+
 }

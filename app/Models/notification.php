@@ -8,9 +8,20 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class notification extends Model
 {
-    protected $garded = ['id'];
-    public function user() : BelongsTo
+    protected $fillable = [
+        'user_id',
+        'title',
+        'message',
+        'link',
+        'is_read',
+        'dep_id'
+    ];
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+    public function department(): BelongsTo
+    {
+        return $this->belongsTo(department::class, 'dep_id');
     }
 }
